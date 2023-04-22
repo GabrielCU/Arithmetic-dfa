@@ -53,6 +53,8 @@ The initial state is `start`, and the accept states are `int`, `float`, `exp`, `
 - `op`: The current character is an operator.
 - `spa`: The current character is a space.
 - `op_spa`: The current character is a space after an operator.
+- `opn`: The current character is an opening parenthesis.
+- `cls`: The current character is a closing parenthesis.
 - `inv`: The current character is invalid.
 
 The transition function handles different scenarios for each state, updating the state according to the DFA rules.
