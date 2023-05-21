@@ -58,3 +58,5 @@ The initial state is `start`, and the accept states are `int`, `float`, `exp`, `
 - `inv`: The current character is invalid.
 
 The transition function handles different scenarios for each state, updating the state according to the DFA rules.
+
+![Arithmetic DFA](arithmetic_dfa.png)
