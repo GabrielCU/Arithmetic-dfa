@@ -1,10 +1,4 @@
-#|
-    Programming a DFA
-    Using recursion and Finite State Automata
-
-    Gilberto Echeverria
-    2021-03-24
-|#
+#lang racket
 
 ; Import library for unit testing
 (require rackunit)
