@@ -23,28 +23,32 @@ Gabriel Cordova
 
 (define (evaluate-dfa dfa-to-evaluate strng)
    " This function will verify if a string is acceptable by a DFA "
-   (let loop
-      (; Get the initial state of the DFA
-      [state (dfa-initial dfa-to-evaluate)]
-      ; Convert the string into a list of characters
-      [chars (string->list (trim-leading-spaces (trim-ending-spaces strng)))]
-      ; The return list with all the tokens found
-      [tokens '()]
-      [result null])
+    (let loop
+        (; Get the initial state of the DFA
+        [state (dfa-initial dfa-to-evaluate)]
+        ; Convert the string into a list of characters
+        [chars (string->list (trim-leading-spaces (trim-ending-spaces strng)))]
+        ; The return list with all the tokens found
+        [tokens '()]
+        [result null])
 
-      ; When the list of chars is over, check if the final state is acceptable
-      (if (empty? chars) 
-         (if (member state (dfa-accept dfa-to-evaluate))
-           (reverse (cons (list(list->string (reverse tokens)) state) result)) #f)
-         (let-values 
+        ; When the list of chars is over, check if the final state is acceptable
+        (if (empty? chars) 
+            (if (member state (dfa-accept dfa-to-evaluate))
+                (reverse (cons (list(list->string (reverse tokens)) state) result)) #f)
+        (let-values 
             ; Call the transition function and get the new state and whether or not a token was found
             ([(new-state state) ((dfa-func dfa-to-evaluate) state (car chars))])
             (loop
-               state
-               (cdr chars)
-               ; The new list of tokens
-               (if new-state (if (char-whitespace?( car chars))(empty-list tokens) (cons (car chars)(empty-list tokens))) (cons(car chars) tokens)) 
-                     (if new-state (cons (list (list->string (reverse tokens)) new-state) result) result))))))
+                state
+                (cdr chars)
+                ; The new list of tokens
+                (if new-state (if (char-whitespace?( car chars))
+                               (empty-list tokens)
+                               (cons (car chars) (empty-list tokens)))
+                (cons(car chars) tokens)) 
+                (if new-state (cons (list (list->string (reverse tokens))
+                    new-state) result) result))))))
 
 
 (define (empty-list lst)
